@@ -1,4 +1,4 @@
-Feature: Database Migrations
+Feature: Database Transactions
     In order to test if transactions are done per scenario
     As the Maintainer
     I want to save two database items
