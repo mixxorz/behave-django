@@ -39,3 +39,13 @@ def save_object(context):
 def should_have_only_one_object(context):
     assert 1 == BehaveTestModel.objects.count()
 
+    
+@when(u'I use the unittest assert library')
+def use_assert_library(context):
+    # If one of them works, all of them work. ;)
+    context.test.assertEqual(1, 1)
+    
+
+@then(u'it should work properly')
+def asserts_should_work(context):
+    pass
