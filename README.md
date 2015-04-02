@@ -53,6 +53,46 @@ Run `python manage.py behave`
     Took.010s
     Destroying test database for alias 'default'...
 
+## Usage
+
+#### Web Browser Automation
+You can access the test HTTP server from your preferred web automation library via `context.base_url`. Normally, this would be set to `http://127.0.0.1:8081`.
+
+Example:
+	
+    # Using Splinter
+	@when(u'I visit "{url}"')
+    def visit(context, url):
+    	context.browser.visit(context.base_url + url)
+        
+#### Database transactions per scenario
+Each scenario is run inside a database transaction, just like your regular TestCases. So you can do something like:
+
+	@given(u'User exists')
+    def create_user(context):
+    	# This won't be here for the next scenario
+    	User.objects.create_user(username='mixxorz', password-'thebestpassword')
+    
+
+#### Django's testing client
+Attached to the context is an instance of a TestCase. You can access this via `context.test`. This means you can do things like use Django's testing client.
+	
+    # Using Django's testing client
+	@when(u'I visit "{url}"')
+    def visit(context, url):
+    	response = context.test.client.get(url)
+	
+
+#### unittest + Django assert library
+Additionally, you can also utilize the unittest and Django assert library.
+
+	@when(u'I visit "{url}"')
+    def visit(context, url):
+    	response = context.test.client.get(url)
+        context.test.assertEqual(response.status_code, 200)
+        context.test.assertContains(response, 'Behave Django works')
+
+
 ## TODO
 * You should be able to set where you features directory will be.
 * You should be able to pass regular behave command line args.
