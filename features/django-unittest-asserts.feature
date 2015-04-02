@@ -6,3 +6,7 @@ Feature: Django + unittest asserts
     Scenario: Testing the unittest assert library
         When I use the unittest assert library
         Then it should work properly
+        
+    Scenario: Testing the django assert library
+        When I use the django assert library
+        Then it should work properly
