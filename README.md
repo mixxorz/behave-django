@@ -12,6 +12,10 @@ Behave BDD integration for Django
 Install using pip
 
 	pip install behave-django
+    
+Add `behave_django` to your `INSTALLED_APPS`
+
+    INSTALLED_APPS += ('behave_django',)
 
 Create the features directory in your project's root directory.
 
