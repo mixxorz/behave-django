@@ -1,11 +1,15 @@
-import urllib2
+try:
+    from urllib2 import urlopen
+except ImportError:
+    from urllib.request import urlopen
 
 from behave import when, then
 
 
 @when(u'I visit "{url}"')
 def visit(context, url):
-    context.response = urllib2.urlopen(context.base_url + url).read()
+    page = urlopen(context.base_url + url)
+    context.response = str(page.read())
 
 
 @then(u'I should see "{text}"')
