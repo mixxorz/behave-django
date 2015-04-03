@@ -8,11 +8,11 @@ Behave BDD integration for Django
 * Use Django's testing client
 * Use unittest + Django assert library
 
-## Support
-behave-django has currently been tested on Django 1.7.7 and 1.8 on Python 2.7, 3.3 and 3.4. However, it may work on other setups.
+## Getting started
+[Read the wiki!](https://github.com/mixxorz/behave-django/wiki/Getting-started)
 
-## Installation and Usage
-[Read the wiki!](https://github.com/mixxorz/behave-django/wiki)
+## Support
+behave-django is tested on Django 1.7.7 and 1.8 on Python 2.7, 3.3 and 3.4. However, it may work with other setups.
 
 ## Contributing
 [Read the quick contributing guide](CONTRIBUTING.md)
