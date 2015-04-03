@@ -104,5 +104,8 @@ Additionally, you can also utilize the unittest and Django assert library.
 
 
 ## Changelog
+### Unreleased
+BUGFIX: Removed test apps and projects from the release package
+
 ### 0.1.0
 * Initial release
