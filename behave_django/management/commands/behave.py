@@ -1,16 +1,50 @@
 from __future__ import absolute_import
+from optparse import make_option
 import os
 
-from behave.configuration import Configuration
+from behave.configuration import Configuration, options
 from behave.runner import Runner
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.test.runner import DiscoverRunner
 
 
+def get_behave_options():
+    new_options = []
+
+    conflicts = [
+        '--no-color',
+        '--version'
+    ]
+
+    for fixed, keywords in options:
+        long_option = None
+        for option in fixed:
+            if option.startswith("--"):
+                long_option = option
+                break
+
+        # Do not add conflicting options
+        if long_option in conflicts:
+            continue
+
+        if long_option:
+            # type isn't a valid keyword for make_option
+            if hasattr(keywords.get('type'), '__call__'):
+                del keywords['type']
+            # config_help isn't a valid keyword for make_option
+            if 'config_help' in keywords:
+                del keywords['config_help']
+
+            new_options.append(
+                make_option(long_option, **keywords)
+            )
+    return tuple(new_options)
+
+
 class Command(BaseCommand):
-    args = '<app_name app_name ...>'
     help = 'Runs behave tests'
+    option_list = BaseCommand.option_list + get_behave_options()
 
     def handle(self, *args, **options):
         # Configure Behave
