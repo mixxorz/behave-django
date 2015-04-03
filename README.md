@@ -18,7 +18,7 @@ behave-django is tested on Django 1.7.7 and 1.8 on Python 2.7, 3.3 and 3.4. Howe
 [Read the quick contributing guide](CONTRIBUTING.md)
 
 ## Changelog
-### Unreleased
+### 0.1.1
 FEATURE: Behave management command now accepts behave command line arguments
 FEATURE: BEHAVE_FEATURES settings added for multiple feature directories
 BUGFIX: Removed test apps and projects from the release package
