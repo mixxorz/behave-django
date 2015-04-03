@@ -1,5 +1,6 @@
 # behave-django
 Behave BDD integration for Django
+[![Build Status](https://travis-ci.org/mixxorz/behave-django.svg?branch=master)](https://travis-ci.org/mixxorz/behave-django)
 
 ## Features
 * Web Browser Automation ready
