@@ -15,7 +15,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Configure Behave
         configuration = Configuration()
-        configuration.paths = [os.path.join(settings.BASE_DIR, 'features')]
+        if settings.BEHAVE_FEATURES:
+            configuration.paths = [x for x in settings.BEHAVE_FEATURES]
+        else:
+            configuration.paths = [os.path.join(settings.BASE_DIR, 'features')]
         configuration.format = ['pretty']
 
         # Configure django environment
