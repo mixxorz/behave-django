@@ -84,7 +84,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'behave_django', 'templates'),
+# behave_django
+BEHAVE_FEATURES = (
+    os.path.join(BASE_DIR, 'features'),
+    os.path.join(BASE_DIR, 'test_app', 'features')
 )
