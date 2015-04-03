@@ -87,4 +87,5 @@ STATIC_URL = '/static/'
 # behave_django
 BEHAVE_FEATURES = (
     os.path.join(BASE_DIR, 'features'),
+    os.path.join(BASE_DIR, 'test_app', 'features')
 )
