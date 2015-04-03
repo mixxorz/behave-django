@@ -14,7 +14,6 @@ behave-django has currently been tested on Django 1.7.7 and 1.8 on Python 2.7, 3
 [Read the wiki!](https://github.com/mixxorz/behave-django/wiki)
 
 ## TODO
-* You should be able to set where you features directory will be.
 * You should be able to pass regular behave command line args.
 * You should see behave's unimplemented step hints.
 * Support for Django 1.4.20 on Python 2.6 and 2.7
