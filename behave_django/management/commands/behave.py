@@ -1,10 +1,9 @@
 from __future__ import absolute_import
 from optparse import make_option
-import os
+import sys
 
-from behave.configuration import Configuration, options
-from behave.runner import Runner
-from django.conf import settings
+from behave.configuration import options
+from behave.__main__ import main as behave_main
 from django.core.management.base import BaseCommand
 from django.test.runner import DiscoverRunner
 
@@ -47,22 +46,13 @@ class Command(BaseCommand):
     option_list = BaseCommand.option_list + get_behave_options()
 
     def handle(self, *args, **options):
-        # Configure Behave
-        configuration = Configuration()
-        if settings.BEHAVE_FEATURES:
-            configuration.paths = [x for x in settings.BEHAVE_FEATURES]
-        else:
-            configuration.paths = [os.path.join(settings.BASE_DIR, 'features')]
-        configuration.format = ['pretty']
-
         # Configure django environment
         django_test_runner = DiscoverRunner()
         django_test_runner.setup_test_environment()
         old_config = django_test_runner.setup_databases()
 
         # Run Behave tests
-        runner = Runner(configuration)
-        runner.run()
+        behave_main(args=sys.argv[2:])
 
         # Teardown django environment
         django_test_runner.teardown_databases(old_config)

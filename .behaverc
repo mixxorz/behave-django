@@ -1,0 +1,4 @@
+[behave]
+paths=features/
+      test_app/features/
+
