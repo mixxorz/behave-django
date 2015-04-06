@@ -83,9 +83,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# behave_django
-BEHAVE_FEATURES = (
-    os.path.join(BASE_DIR, 'features'),
-    os.path.join(BASE_DIR, 'test_app', 'features')
-)
