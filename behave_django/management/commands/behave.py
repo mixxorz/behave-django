@@ -46,15 +46,13 @@ class Command(BaseCommand):
     option_list = BaseCommand.option_list + get_behave_options()
 
     def handle(self, *args, **options):
-        sys.argv = sys.argv[1:]
-
         # Configure django environment
         django_test_runner = DiscoverRunner()
         django_test_runner.setup_test_environment()
         old_config = django_test_runner.setup_databases()
 
         # Run Behave tests
-        behave_main()
+        behave_main(args=sys.argv[2:])
 
         # Teardown django environment
         django_test_runner.teardown_databases(old_config)
