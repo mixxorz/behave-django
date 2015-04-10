@@ -20,6 +20,10 @@ install:
 script: python manage.py behave
 matrix:
   exclude:
+   - python: "2.6"
+     env: DJANGO=django==1.7.7
+   - python: "2.6"
+     env: DJANGO=django==1.8
    - python: "3.3"
      env: DJANGO=django==1.4.20
    - python: "3.4"
