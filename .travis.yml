@@ -13,8 +13,6 @@ env:
 install:
   - if [[ $TRAVIS_PYTHON_VERSION == "2.6" ]]; then pip install importlib argparse; fi
   - pip install $DJANGO
-  - "pip install -r requirements.txt"
-  - pip install $DJANGO
   - pip install -r requirements.txt
 # Test behave_django with behave :)
 script: python manage.py behave
