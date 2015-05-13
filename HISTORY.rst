@@ -11,9 +11,9 @@ Release History
 
 **Bugfixes**
 
-- The behave command should not correctly return non-zero exit codes when a test fails.
+- The behave command should now correctly return non-zero exit codes when a test fails.
 
-0.1.2 (2015-05-13)
+0.1.2 (2015-04-06)
 ++++++++++++++++++
 
 **Features and Improvements**
@@ -21,7 +21,7 @@ Release History
 - You can now have a :code:`.behaverc` in your project's root directory. You can specify where your feature directories are in this file, among other things. See the `behave docs on configuration files <https://pythonhosted.org/behave/behave.html#configuration-files>`__.
 - Removed BEHAVE\_FEATURES setting in favor of using behave's configuration file
 
-0.1.1 (2015-05-13)
+0.1.1 (2015-04-04)
 ++++++++++++++++++
 
 **Features and Improvements**
@@ -33,7 +33,7 @@ Release History
 
 - Removed test apps and projects from the release package
 
-0.1.0 (2015-05-13)
+0.1.0 (2015-04-02)
 ++++++++++++++++++
 
 -  Initial release
