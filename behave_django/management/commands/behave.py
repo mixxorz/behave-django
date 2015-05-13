@@ -5,7 +5,11 @@ import sys
 from behave.configuration import options
 from behave.__main__ import main as behave_main
 from django.core.management.base import BaseCommand
-from django.test.runner import DiscoverRunner
+
+try:
+    from django.test.runner import DiscoverRunner
+except ImportError:
+    from django.test.simple import DjangoTestSuiteRunner as DiscoverRunner
 
 
 def get_behave_options():

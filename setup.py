@@ -20,7 +20,7 @@ setup(
     author_email='mixxorz@gmail.com',
     install_requires=[
         'behave',
-        'Django>=1.7'
+        'Django>=1.4'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
