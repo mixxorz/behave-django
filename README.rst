@@ -14,6 +14,7 @@ Features
 -  Use unittest + Django assert library
 -  Use behave's command line arguments
 -  Use behave's configuration file
+-  Fixture loading
 
 Getting started
 ---------------
@@ -23,7 +24,13 @@ Getting started
 Support
 -------
 
-behave-django is tested on Django 1.7.7 and 1.8 on Python 2.7, 3.3 and 3.4. However, it may work with other setups.
+behave-django is tested on:
+
+Django 1.4.20, 1.5.12, 1.6.11, 1.7.7, 1.8
+
+Python 2.6, 2.7, 3.3, 3.4
+
+It should work on everything, basically.
 
 Contributing
 ------------
@@ -32,6 +39,13 @@ Contributing
 
 Changelog
 ---------
+
+0.1.3
+^^^^^
+
+-  FEATURE: Fixture loading. You can now load your fixtures by setting :code:`context.fixtures`.
+-  BUGFIX: behave-django now supports all versions of Django
+-  BUGFIX: The behave command should not correctly return non-zero exit codes when a test fails.
 
 0.1.2
 ^^^^^
