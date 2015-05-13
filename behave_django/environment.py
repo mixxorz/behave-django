@@ -7,8 +7,6 @@ def before_scenario(context, scenario):
     # This is probably a hacky method of setting up the test case
     # outside of a test runner. Suggestions are welcome. :)
 
-    # BehaveDjangoTestCase.fixtures = ['behave-fixtures.json']
-
     context.test = BehaveDjangoTestCase()
     context.test.setUpClass()
     context.test()
