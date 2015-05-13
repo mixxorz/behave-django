@@ -15,7 +15,8 @@ install:
   - pip install $DJANGO
   - pip install -r requirements.txt
 # Test behave_django with behave :)
-script: python manage.py behave
+# Skip the failing test case
+script: python manage.py behave --tags=~@failing && python tests.py
 matrix:
   exclude:
    - python: "2.6"
