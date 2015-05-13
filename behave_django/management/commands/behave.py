@@ -56,8 +56,11 @@ class Command(BaseCommand):
         old_config = django_test_runner.setup_databases()
 
         # Run Behave tests
-        behave_main(args=sys.argv[2:])
+        return_code = behave_main(args=sys.argv[2:])
 
         # Teardown django environment
         django_test_runner.teardown_databases(old_config)
         django_test_runner.teardown_test_environment()
+
+        if return_code != 0:
+            sys.exit(return_code)
