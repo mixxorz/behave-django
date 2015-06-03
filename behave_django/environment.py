@@ -2,9 +2,9 @@ from django.core.management import call_command
 try:
     from django.shortcuts import resolve_url
 except ImportError:
-    import warnings
-    warnings.warn("URL path supported only in get_url() with Django < 1.5")
-    resolve_url = lambda to, *args, **kwargs: to
+    from django.shortcuts import redirect
+    resolve_url = lambda to, *args, **kwargs: \
+        redirect(to, *args, **kwargs)['Location']
 
 from behave_django.testcase import BehaveDjangoTestCase
 
