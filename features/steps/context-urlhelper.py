@@ -1,12 +1,7 @@
-from behave import given, when, then
+from behave import when, then
 from django.core.urlresolvers import reverse
 
-
-@given(u'get_url(reverse="{reverse_arg}") returns a different value than '
-       u'get_url(path="{path_arg}")')
-def ensure_different(context, reverse_arg, path_arg):
-    assert \
-        context.get_url(reverse=reverse_arg) != context.get_url(path=path_arg)
+from test_app.models import BehaveTestModel
 
 
 @when(u'I call get_url() without arguments')
@@ -14,27 +9,20 @@ def without_args(context):
     context.__result = context.get_url()
 
 
-@when(u'I call get_url("{path_arg}") with one positional argument')
-def one_positional_arg(context, path_arg):
-    context.__result = context.get_url(path_arg)
+@when(u'I call get_url("{url_path}") with an absolute path')
+def path_arg(context, url_path):
+    context.__result = context.get_url(url_path)
 
 
-@when(u'I call get_url("{path_arg}", "{reverse_arg}") '
-      u'with two positional arguments')
-def two_positional_args(context, path_arg, reverse_arg):
-    context.__result = context.get_url(path_arg, reverse_arg)
+@when(u'I call get_url("{view_name}") with a view name')
+def view_arg(context, view_name):
+    context.__result = context.get_url(view_name)
 
 
-@when(u'I call get_url(reverse="{reverse_arg}") '
-      u'with the reverse keyword argument')
-def one_keyword_arg(context, reverse_arg):
-    context.__result = context.get_url(reverse=reverse_arg)
-
-
-@when(u'I call get_url(reverse="{reverse_arg}", path="{path_arg}") '
-      u'with two keyword arguments')
-def two_keyword_args(context, reverse_arg, path_arg):
-    context.__result = context.get_url(reverse=reverse_arg, path=path_arg)
+@when(u'I call get_url(model) with a model instance')
+def model_arg(context):
+    context.__model = BehaveTestModel(name='Foo', number=3)
+    context.__result = context.get_url(context.__model)
 
 
 @then(u'it returns the value of base_url')
@@ -42,16 +30,18 @@ def is_baseurl_value(context):
     assert context.base_url == context.__result
 
 
-@then(u'the result is the base_url with "{path_arg}" appended')
-def baseurl_plus_path(context, path_arg):
-    assert context.base_url + path_arg == context.__result
+@then(u'the result is the base_url with "{url_path}" appended')
+def baseurl_plus_path(context, url_path):
+    assert context.base_url + url_path == context.__result
 
 
-@then(u'this returns the same result as get_url(reverse("{reverse_arg}"))')
-def explicit_reverse(context, reverse_arg):
-    assert context.get_url(reverse(reverse_arg)) == context.__result
+@then(u'this returns the same result as get_url(reverse("{view_name}"))')
+def explicit_reverse(context, view_name):
+    reversed_view = reverse(view_name)
+    assert context.get_url(reversed_view) == context.__result
 
 
-@then(u'this returns the same result as get_url("{path_arg}")')
-def implicit_path_arg(context, path_arg):
-    assert context.get_url(path_arg) == context.__result
+@then(u'this returns the same result as get_url(model.get_absolute_url())')
+def get_model_url(context):
+    path = context.__model.get_absolute_url()
+    assert context.get_url(path) == context.__result
