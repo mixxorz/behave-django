@@ -1,5 +1,6 @@
 from behave import when, then
 
+
 @when(u'I use django\'s test client to visit "{url}"')
 def use_django_client(context, url):
     context.response = context.test.client.get(url)
