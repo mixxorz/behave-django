@@ -1,6 +1,13 @@
 Release History
 ---------------
 
+0.1.4 (2015-06-08)
+++++++++++++++++++
+
+**Features and Improvements**
+
+- `context.get_url()`. URL helper attached to context with built-in reverse resolution as a handy shortcut.
+
 0.1.3 (2015-05-13)
 ++++++++++++++++++
 
