@@ -1,26 +1,31 @@
-import os
+from os import chdir
+from os.path import abspath, dirname, join, normpath
 from setuptools import find_packages, setup
 
-with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
+with open(join(dirname(__file__), 'README.rst')) as readme:
     README = readme.read()
 
 # allow setup.py to be run from any path
-os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+chdir(normpath(abspath(dirname(__file__))))
+
+import behave_django
 
 setup(
-    name='behave-django',
-    version='0.1.3',
+    name=behave_django.__name__,
+    version=behave_django.__version__,
     packages=find_packages(exclude=['test*']),
     include_package_data=True,
-    license='MIT License',
-    description='Behave BDD integration for Django',
+    license=behave_django.__license__,
+    description=behave_django.__doc__,
     long_description=README,
     url='https://github.com/mixxorz/behave-django',
     author='Mitchel Cabuloy',
     author_email='mixxorz@gmail.com',
+    maintainer='Mitchel Cabuloy',
+    maintainer_email='mixxorz@gmail.com',
     install_requires=[
         'behave',
-        'Django>=1.4'
+        'Django>=1.4',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -33,6 +38,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
