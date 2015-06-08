@@ -11,6 +11,7 @@ class BehaveDjangoTestCase(unittest.TestCase):
             ['python', 'manage.py', 'behave', '--tags', '~@failing'],
             stdout=FNULL,
             stderr=subprocess.STDOUT)
+        FNULL.close()
         self.assertEqual(return_code, 0)
 
     def test_command_should_exit_nonzero_if_failing(self):
@@ -19,6 +20,7 @@ class BehaveDjangoTestCase(unittest.TestCase):
             ['python', 'manage.py', 'behave', '--tags', '@failing'],
             stdout=FNULL,
             stderr=subprocess.STDOUT)
+        FNULL.close()
         self.assertNotEqual(return_code, 0)
 
 if __name__ == '__main__':
