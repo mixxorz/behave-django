@@ -11,7 +11,7 @@ chdir(normpath(abspath(dirname(__file__))))
 import behave_django
 
 setup(
-    name=behave_django.__name__,
+    name='behave-django',
     version=behave_django.__version__,
     packages=find_packages(exclude=['test*']),
     include_package_data=True,
