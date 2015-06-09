@@ -1,23 +1,5 @@
-behave-django
-=============
-
-|Build Status| |Latest Version|
-
-Behave BDD integration for Django
-
-Features
---------
-
--  Web Browser Automation ready
--  Database transactions per scenario
--  Use Django's testing client
--  Use unittest + Django assert library
--  Use behave's command line arguments
--  Use behave's configuration file
--  Fixture loading
-
 Installation
-------------
+============
 
 Install using pip
 
@@ -74,40 +56,3 @@ Run ``python manage.py behave``
     3 steps passed, 0 failed, 0 skipped, 0 undefined
     Took.010s
     Destroying test database for alias 'default'...
-
-What's next?
-------------
-
-`Read the docs!`_
-
-
-Support
--------
-
-behave-django is tested on:
-
-Django 1.4.20, 1.5.12, 1.6.11, 1.7.8, 1.8.2
-
-Python 2.6, 2.7, 3.3, 3.4
-
-It should work on everything, basically.
-
-Contributing
-------------
-
-Read the `contributing guide`_
-
-Resources
----------
-
--  `behave-django documentation`_
--  `behave`_
-
-.. _behave-django documentation: https://pythonhosted.org/behave-django/
-.. _Read the docs!: https://pythonhosted.org/behave-django/
-.. _behave: https://github.com/behave/behave
-.. _contributing guide: https://github.com/mixxorz/behave-django/blob/master/CONTRIBUTING.md
-.. |Build Status| image:: https://travis-ci.org/mixxorz/behave-django.svg?branch=master
-   :target: https://travis-ci.org/mixxorz/behave-django
-.. |Latest Version| image:: https://badge.fury.io/py/behave-django.svg
-    :target: http://badge.fury.io/py/behave-django
