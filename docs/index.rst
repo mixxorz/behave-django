@@ -50,7 +50,6 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-.. * :ref:`modindex`
 * :ref:`search`
 
 .. _contributing guide: https://github.com/mixxorz/behave-django/blob/master/CONTRIBUTING.md
