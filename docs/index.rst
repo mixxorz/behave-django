@@ -55,5 +55,5 @@ Indices and tables
 .. _contributing guide: https://github.com/mixxorz/behave-django/blob/master/CONTRIBUTING.md
 .. |Build Status| image:: https://travis-ci.org/mixxorz/behave-django.svg?branch=master
    :target: https://travis-ci.org/mixxorz/behave-django
-.. |Latest Version| image:: https://pypip.in/version/behave-django/badge.svg
-   :target: https://pypi.python.org/pypi/behave-django/
+.. |Latest Version| image:: https://badge.fury.io/py/behave-django.svg
+    :target: http://badge.fury.io/py/behave-django
