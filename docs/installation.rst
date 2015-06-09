@@ -1,26 +1,22 @@
-************
 Installation
-************
+============
 
 Install using pip
 
-.. code-block:: python
+.. code:: bash
 
     $ pip install behave-django
 
-Add :code:`behave_django` to your :code:`INSTALLED_APPS`
+Add ``behave_django`` to your ``INSTALLED_APPS``
 
-.. code-block:: python
+.. code:: python
 
-    INSTALLED_APPS = ('
-        ...
-        behave_django',
-        ...
-    )
+    INSTALLED_APPS += ('behave_django',)
 
-Create the features directory in your project's root directory. (Next to `manage.py`)
+Create the features directory in your project’s root directory. (Next to
+``manage.py``)
 
-.. code-block::
+::
 
     features/
         steps/
@@ -28,9 +24,9 @@ Create the features directory in your project's root directory. (Next to `manage
         environment.py
         your-feature.feature
 
-Setup your `environment.py` file
+Setup your ``environment.py`` file
 
-.. code-block:: python
+.. code:: python
 
     from behave_django import environment
 
@@ -40,9 +36,9 @@ Setup your `environment.py` file
     def after_scenario(context, scenario):
         environment.after_scenario(context, scenario)
 
-Run :code:`python manage.py behave`
+Run ``python manage.py behave``
 
-.. code-block::
+::
 
     $ python manage.py behave
     Creating test database for alias 'default'...
@@ -60,4 +56,3 @@ Run :code:`python manage.py behave`
     3 steps passed, 0 failed, 0 skipped, 0 undefined
     Took.010s
     Destroying test database for alias 'default'...
-
