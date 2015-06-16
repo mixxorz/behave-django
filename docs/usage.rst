@@ -52,7 +52,7 @@ regular TestCases. So you can do something like:
 
 And you don’t have to clean the database yourself. :grinning:
 
-If you have factories you want to instantiate on a per-scenario basis,
+If you have `factories`_ you want to instantiate on a per-scenario basis,
 you can initialize them in ``environment.py`` like this:
 
 .. code:: python
@@ -169,4 +169,5 @@ mutate it however you want, up until the behave-django hook
 ``environment.before_scenario()``.
 
 .. _django.shortcuts.redirect: https://docs.djangoproject.com/en/dev/topics/http/shortcuts/#redirect
+.. _factories: https://factoryboy.readthedocs.org/en/latest/
 .. _here: https://pythonhosted.org/behave/behave.html#configuration-files
