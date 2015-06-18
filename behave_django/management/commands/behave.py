@@ -6,10 +6,7 @@ from behave.configuration import options
 from behave.__main__ import main as behave_main
 from django.core.management.base import BaseCommand
 
-try:
-    from django.test.runner import DiscoverRunner
-except ImportError:
-    from django.test.simple import DjangoTestSuiteRunner as DiscoverRunner
+from ...runner import BehaveDjangoTestRunner
 
 
 def get_behave_options():
@@ -51,7 +48,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Configure django environment
-        django_test_runner = DiscoverRunner()
+        django_test_runner = BehaveDjangoTestRunner()
         django_test_runner.setup_test_environment()
         old_config = django_test_runner.setup_databases()
 
