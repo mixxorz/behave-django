@@ -16,6 +16,14 @@ Features
 -  Use behave's configuration file
 -  Fixture loading
 
+Support
+-------
+
+behave-django supports all current Django and Python versions.
+Specifically, our tests cover:
+
+Django 1.4.20, 1.5.12, 1.6.11, 1.7.8, 1.8.2, and Python 2.6, 2.7, 3.3, 3.4.
+
 Installation
 ------------
 
@@ -75,37 +83,20 @@ Run ``python manage.py behave``
     Took.010s
     Destroying test database for alias 'default'...
 
-What's next?
-------------
+Documentation
+-------------
 
-`Read the docs!`_
+-  Documentation is available from `pythonhosted.org/behave-django`_
+-  Read more about *behave* at `pythonhosted.org/behave`_
+
+How to Contribute
+-----------------
+
+Please, read the `contributing guide`_.
 
 
-Support
--------
-
-behave-django is tested on:
-
-Django 1.4.20, 1.5.12, 1.6.11, 1.7.8, 1.8.2
-
-Python 2.6, 2.7, 3.3, 3.4
-
-It should work on everything, basically.
-
-Contributing
-------------
-
-Read the `contributing guide`_
-
-Resources
----------
-
--  `behave-django documentation`_
--  `behave`_
-
-.. _behave-django documentation: https://pythonhosted.org/behave-django/
-.. _Read the docs!: https://pythonhosted.org/behave-django/
-.. _behave: https://github.com/behave/behave
+.. _pythonhosted.org/behave-django: https://pythonhosted.org/behave-django/
+.. _pythonhosted.org/behave: http://pythonhosted.org/behave/
 .. _contributing guide: https://github.com/mixxorz/behave-django/blob/master/CONTRIBUTING.md
 .. |Build Status| image:: https://travis-ci.org/mixxorz/behave-django.svg?branch=master
    :target: https://travis-ci.org/mixxorz/behave-django

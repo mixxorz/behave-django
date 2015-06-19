@@ -5,10 +5,13 @@ Web Browser Automation
 ----------------------
 
 You can access the test HTTP server from your preferred web automation
-library via ``context.base_url``. Normally, this would be set to
-``http://localhost:8081``.
+library via ``context.base_url`` (normally, this would be set to
+``http://localhost:8081``).  Alternatively, you can use
+``context.get_url()``, which is a helper function for absolute paths and
+reversing URLs in your Django project.  It takes an absolute path, a view
+name, or a model as an argument, similar to `django.shortcuts.redirect`_.
 
-Example:
+Examples:
 
 .. code:: python
 
@@ -17,31 +20,24 @@ Example:
     def visit(context, url):
         context.browser.visit(context.base_url + url)
 
-Alternatively, there is a helper function ``context.get_url()`` that
-helps you get absolute URLs for your Django project. It takes an
-absolute path, a view name, or a model as an argument, similar to
-`django.shortcuts.redirect`_.
-
-Examples
-
 .. code:: python
 
+    # Get context.base_url
     context.get_url()
-    # Returns context.base_url
+    # Get context.base_url + '/absolute/url/here'
     context.get_url('/absolute/url/here')
-    # Returns context.base_url + '/absolute/url/here'
+    # Get context.base_url + reverse('view-name')
     context.get_url('view-name')
-    # Returns context.base_url + reverse('view-name')
+    # Get context.base_url + reverse('view-name', 'with args', and='kwargs')
     context.get_url('view-name', 'with args', and='kwargs')
-    # Returns context.base_url + reverse('view-name', 'with args', and='kwargs')
+    # Get context.base_url + model_instance.get_absolute_url()
     context.get_url(model_instance)
-    # Returns context.base_url + model_instance.get_absolute_url()
 
 Database transactions per scenario
 ----------------------------------
 
 Each scenario is run inside a database transaction, just like your
-regular TestCases. So you can do something like:
+regular TestCases.  So you can do something like:
 
 .. code:: python
 
@@ -50,7 +46,7 @@ regular TestCases. So you can do something like:
         # This won't be here for the next scenario
         User.objects.create_user(username=username, password-'correcthorsebatterystaple')
 
-And you don’t have to clean the database yourself. :grinning:
+And you don’t have to clean the database yourself.  :grinning:
 
 If you have `factories`_ you want to instantiate on a per-scenario basis,
 you can initialize them in ``environment.py`` like this:
@@ -59,8 +55,8 @@ you can initialize them in ``environment.py`` like this:
 
     from behave_django import environment
     from myapp.main.tests.factories import UserFactory, RandomContentFactory
-    
-    
+
+
     def before_scenario(context, scenario):
         environment.before_scenario(context, scenario)
         UserFactory(username='user1')
@@ -73,8 +69,8 @@ Note that the factories are instantiated *after* the call to
 Django’s testing client
 -----------------------
 
-Attached to the context is an instance of TestCase. You can access it
-via ``context.test``. This means you can do things like use Django’s
+Attached to the context is an instance of TestCase.  You can access it
+via ``context.test``.  This means you can do things like use Django’s
 testing client.
 
 .. code:: python
@@ -109,9 +105,9 @@ management command.
 Behave configuration file
 -------------------------
 
-You can use behave’s configuration file. Just create a
+You can use behave’s configuration file.  Just create a
 ``behave.ini``/``.behaverc`` file in your project’s root directory and
-behave will pick it up. You can read more about it `here`_.
+behave will pick it up.  You can read more about it `here`_.
 
 For example, if you want to have your features directory somewhere else.
 In your .behaverc file, you can put
@@ -127,7 +123,7 @@ Behave should now look for your features in those folders.
 Fixture loading
 ---------------
 
-behave-django can load your fixtures for you per feature/scenario. In
+behave-django can load your fixtures for you per feature/scenario.  In
 ``environment.py``, before the call to behave-django’s
 ``environment.before_scenario()``, we can load our context with the
 fixtures array.
