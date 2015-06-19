@@ -6,7 +6,7 @@ from behave.configuration import options
 from behave.__main__ import main as behave_main
 from django.core.management.base import BaseCommand
 
-from ...runner import BehaveDjangoTestRunner
+from behave_django.runner import BehaveDjangoTestRunner
 
 
 def get_behave_options():

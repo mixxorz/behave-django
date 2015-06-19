@@ -5,10 +5,10 @@ except ImportError:
 
 
 class ExistingDatabaseTestRunner(DiscoverRunner):
-    def setup_databases(self, **kwargs):
+    def setup_databases(self, *args, **kwargs):
         pass
 
-    def teardown_databases(self, old_config, **kwargs):
+    def teardown_databases(self, *args, **kwargs):
         pass
 
 
