@@ -53,18 +53,13 @@ you can initialize them in ``environment.py`` like this:
 
 .. code:: python
 
-    from behave_django import environment
     from myapp.main.tests.factories import UserFactory, RandomContentFactory
 
 
     def before_scenario(context, scenario):
-        environment.before_scenario(context, scenario)
         UserFactory(username='user1')
         UserFactory(username='user2')
         RandomContentFactory()
-
-Note that the factories are instantiated *after* the call to
-``environment.before_scenario``.
 
 Django’s testing client
 -----------------------
@@ -92,8 +87,8 @@ Additionally, you can utilize unittest and Django’s assert library.
         response = context.response # from previous step
         context.test.assertContains(response, text)
 
-Behave command line options
----------------------------
+Command line options
+--------------------
 
 You can use regular behave command line options with the behave
 management command.
@@ -102,12 +97,21 @@ management command.
 
     $ python manage.py behave --tags @wip
 
+Additional command line options provided by django_behave:
+
+--use-existing-database
+    Don't create a test database, and use the database of your default
+    runserver instead.  USE AT YOUR OWN RISK!  Only use this option
+    for testing against a *copy* of your production database or other
+    valuable data.  Your tests may destroy your data irrecoverably.
+
 Behave configuration file
 -------------------------
 
 You can use behave’s configuration file.  Just create a
-``behave.ini``/``.behaverc`` file in your project’s root directory and
-behave will pick it up.  You can read more about it `here`_.
+``behave.ini``/``.behaverc``/``setup.cfg`` file in your project’s root
+directory and behave will pick it up.  You can read more about it in the
+`behave docs`_.
 
 For example, if you want to have your features directory somewhere else.
 In your .behaverc file, you can put
@@ -124,15 +128,12 @@ Fixture loading
 ---------------
 
 behave-django can load your fixtures for you per feature/scenario.  In
-``environment.py``, before the call to behave-django’s
-``environment.before_scenario()``, we can load our context with the
-fixtures array.
+``environment.py`` we can load our context with the fixtures array.
 
 .. code:: python
 
     def before_scenario(context, scenario):
         context.fixtures = ['user-data.json']
-        environment.before_scenario(context, scenario)
 
 This fixture would then be loaded before every scenario.
 
@@ -145,7 +146,6 @@ If you wanted different fixtures for different scenarios:
             context.fixtures = ['user-data.json']
         elif scenario.name == 'Check out cart':
             context.fixtures = ['user-data.json', 'store.json', 'cart.json']
-        environment.before_scenario(context, scenario)
 
 You could also have fixtures per Feature too
 
@@ -154,16 +154,13 @@ You could also have fixtures per Feature too
     def before_feature(context, feature):
         if feature.name == 'Login':
             context.fixtures = ['user-data.json']
-            # This works because behave will use the same context for everything below Feature. (Scenarios, Outlines, Backgrounds)
-
-    def before_scenario(context, scenario):
-        # You wouldn't need to change anything
-        environment.before_scenario(context, scenario)
+            # This works because behave will use the same context for
+            # everything below Feature. (Scenarios, Outlines, Backgrounds)
 
 Of course, since ``context.fixtures`` is really just a list, you can
-mutate it however you want, up until the behave-django hook
-``environment.before_scenario()``.
+mutate it however you want, it will only be processed upon leaving the
+``before_scenario()`` function of your ``environment.py`` file.
 
 .. _django.shortcuts.redirect: https://docs.djangoproject.com/en/dev/topics/http/shortcuts/#redirect
 .. _factories: https://factoryboy.readthedocs.org/en/latest/
-.. _here: https://pythonhosted.org/behave/behave.html#configuration-files
+.. _behave docs: https://pythonhosted.org/behave/behave.html#configuration-files

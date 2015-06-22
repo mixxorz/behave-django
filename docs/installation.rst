@@ -24,18 +24,6 @@ Create the features directory in your project’s root directory. (Next to
         environment.py
         your-feature.feature
 
-Setup your ``environment.py`` file
-
-.. code:: python
-
-    from behave_django import environment
-
-    def before_scenario(context, scenario):
-        environment.before_scenario(context, scenario)
-
-    def after_scenario(context, scenario):
-        environment.after_scenario(context, scenario)
-
 Run ``python manage.py behave``
 
 ::

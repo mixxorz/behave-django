@@ -26,10 +26,6 @@ class BehaviorDrivenTestRunner(DiscoverRunner):
         context.test.setUpClass()
         context.test()
 
-        # Load fixtures
-        if getattr(context, 'fixtures', None):
-            call_command('loaddata', *context.fixtures, verbosity=0)
-
         context.base_url = context.test.live_server_url
 
         def get_url(to=None, *args, **kwargs):
@@ -37,6 +33,10 @@ class BehaviorDrivenTestRunner(DiscoverRunner):
                 resolve_url(to, *args, **kwargs) if to else '')
 
         context.get_url = get_url
+
+    def load_fixtures(self, context):
+        if getattr(context, 'fixtures', None):
+            call_command('loaddata', *context.fixtures, verbosity=0)
 
     def after_scenario(self, context):
         context.test.tearDownClass()
