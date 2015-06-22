@@ -15,6 +15,3 @@ class ExistingDatabaseTestCase(BehaviorDrivenTestCase):
 
     def _fixture_teardown(self):
         pass
-
-
-BehaveDjangoTestCase = ExistingDatabaseTestCase if True else BehaviorDrivenTestCase
