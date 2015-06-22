@@ -7,7 +7,8 @@ from behave.runner import ModelRunner
 from behave.__main__ import main as behave_main
 from django.core.management.base import BaseCommand
 
-from behave_django.runner import get_runner
+from behave_django.runner import (BehaviorDrivenTestRunner,
+                                  ExistingDatabaseTestRunner)
 
 
 def get_new_options():
@@ -84,7 +85,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Configure django environment
-        django_test_runner = get_runner(options)
+        if options['dry_run'] or options['use_existing_database']:
+            django_test_runner = ExistingDatabaseTestRunner()
+        else:
+            django_test_runner = BehaviorDrivenTestRunner()
         django_test_runner.setup_test_environment()
         old_config = django_test_runner.setup_databases()
 

@@ -1,16 +1,15 @@
+from django.core.management import call_command
+
 try:
     from django.test.runner import DiscoverRunner
 except ImportError:
     from django.test.simple import DjangoTestSuiteRunner as DiscoverRunner
-
-from django.core.management import call_command
 
 try:
     from django.shortcuts import resolve_url
 except ImportError:
     # support Django 1.4, which has no resolve_url() yet
     from django.shortcuts import redirect
-
     resolve_url = lambda to, *args, **kwargs: \
         redirect(to, *args, **kwargs)['Location']
 
@@ -51,12 +50,3 @@ class ExistingDatabaseTestRunner(BehaviorDrivenTestRunner):
 
     def teardown_databases(*args, **kwargs):
         pass
-
-
-def get_runner(options):
-    """Yield a test runner honoring the user supplied command line options."""
-    runner_class = ExistingDatabaseTestRunner \
-        if options['dry_run'] or options['use_existing_database'] \
-        else DiscoverRunner
-
-    return runner_class()
