@@ -2,6 +2,7 @@
 
 # testing (e.g. `python setup.py -q test -v`)
 flake8
+py.test
 
 # docs generation (e.g. `cd docs && make html`)
 Sphinx
