@@ -2,6 +2,7 @@
 behave environment module for testing behave-django
 """
 
+
 def before_feature(context, feature):
     if feature.name == 'Fixture loading':
         context.fixtures = ['behave-fixtures.json']

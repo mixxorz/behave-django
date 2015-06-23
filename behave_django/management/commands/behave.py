@@ -3,10 +3,10 @@ from optparse import make_option
 import sys
 
 from behave.configuration import options as behave_options
-from behave.runner import ModelRunner
 from behave.__main__ import main as behave_main
 from django.core.management.base import BaseCommand
 
+from behave_django.environment import monkey_patch_behave
 from behave_django.runner import (BehaviorDrivenTestRunner,
                                   ExistingDatabaseTestRunner)
 
@@ -59,22 +59,6 @@ def get_behave_args():
     """Remove command line arguments not accepted by behave."""
     options = sys.argv[2:]
     return [opt for opt in options if opt not in get_new_options()]
-
-
-def monkey_patch_behave(django_test_runner):
-    """Integrate behave_django in behave via before/after scenario hooks."""
-    behave_run_hook = ModelRunner.run_hook
-
-    def run_hook(self, name, context, *args):
-        if name == 'before_scenario':
-            django_test_runner.before_scenario(context)
-        behave_run_hook(self, name, context, *args)
-        if name == 'before_scenario':
-            django_test_runner.load_fixtures(context)
-        if name == 'after_scenario':
-            django_test_runner.after_scenario(context)
-
-    ModelRunner.run_hook = run_hook
 
 
 class Command(BaseCommand):
