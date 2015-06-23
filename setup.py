@@ -47,4 +47,5 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Testing',
     ],
+    test_suite='tests',
 )
