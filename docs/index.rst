@@ -2,8 +2,8 @@ Welcome to behave-django's documentation!
 =========================================
 
 .. include:: ../README.rst
-   :start-after: behave-django
-   :end-before: Support
+   :start-after: .. intro-marker
+   :end-before: .. support-marker
 
 Contents
 --------
@@ -14,18 +14,12 @@ Contents
    installation
    usage
 
-Support
--------
+.. include:: ../README.rst
+   :start-after: .. support-marker
+   :end-before: .. install-marker
 
 .. include:: ../README.rst
-   :start-after: Support
-   :end-before: Installation
-
-How to Contribute
------------------
-
-.. include:: ../README.rst
-   :start-after: How to Contribute
+   :start-after: .. contribute-marker
 
 Indices and tables
 ==================
