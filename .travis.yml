@@ -13,9 +13,8 @@ env:
 install:
   - if [[ $TRAVIS_PYTHON_VERSION == "2.6" ]]; then pip install importlib argparse; fi
   - pip install $DJANGO
-  - pip install -r requirements.txt
-# Test behave_django with behave :)
-# Skip the failing test case
+  - pip install -r requirements-dev.txt
+# Test behave_django with behave :)  First, skip the failing test case
 script: python manage.py behave --tags=~@failing && python tests.py
 matrix:
   exclude:

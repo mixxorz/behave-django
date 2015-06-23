@@ -1,6 +1,10 @@
 """
 Test suite for behave-django.  See features folder for implementation.
-Run it by ``python setup.py -q test -v`` or ``python manage.py test``.
+Run it by
+
+- ``python setup.py -q test -v`` or
+- ``python manage.py test`` or
+- ``python tests.py`` (preferred)
 """
 import os
 import subprocess
