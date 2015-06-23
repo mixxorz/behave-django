@@ -57,10 +57,8 @@ def get_behave_options():
 
 def get_behave_args():
     """Remove command line arguments not accepted by behave."""
-    args = sys.argv[2:]
-    for new_arg in get_new_options():
-        args.remove(new_arg.get_opt_string())
-    return args
+    options = sys.argv[2:]
+    return [opt for opt in options if opt not in get_new_options()]
 
 
 def monkey_patch_behave(django_test_runner):
