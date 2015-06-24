@@ -23,10 +23,7 @@ setup(
     author_email='mixxorz@gmail.com',
     maintainer='Mitchel Cabuloy',
     maintainer_email='mixxorz@gmail.com',
-    install_requires=[
-        'behave',
-        'Django>=1.4',
-    ],
+    install_requires=open('requirements.txt').read().split(),
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
@@ -47,4 +44,5 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Testing',
     ],
+    test_suite='tests',
 )
