@@ -58,7 +58,12 @@ def get_behave_options():
 def get_behave_args():
     """Remove command line arguments not accepted by behave."""
     options = sys.argv[2:]
-    return [opt for opt in options if opt not in get_new_options()]
+    for new_opt in get_new_options():
+        try:
+            options.remove(new_opt.get_opt_string())
+        except ValueError:
+            pass
+    return options
 
 
 class Command(BaseCommand):
@@ -76,11 +81,11 @@ class Command(BaseCommand):
 
         # Run Behave tests
         monkey_patch_behave(django_test_runner)
-        return_code = behave_main(args=get_behave_args())
+        exit_status = behave_main(args=get_behave_args())
 
         # Teardown django environment
         django_test_runner.teardown_databases(old_config)
         django_test_runner.teardown_test_environment()
 
-        if return_code != 0:
-            sys.exit(return_code)
+        if exit_status != 0:
+            sys.exit(exit_status)
