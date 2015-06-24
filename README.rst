@@ -1,10 +1,12 @@
 behave-django
 =============
+.. intro-marker
 
 |Build Status| |Latest Version|
 
 Behave BDD integration for Django
 
+.. features-marker
 Features
 --------
 
@@ -16,6 +18,7 @@ Features
 -  Use behave's configuration file
 -  Fixture loading
 
+.. support-marker
 Support
 -------
 
@@ -24,6 +27,7 @@ Specifically, our tests cover:
 
 Django 1.4.20, 1.5.12, 1.6.11, 1.7.8, 1.8.2, and Python 2.6, 2.7, 3.3, 3.4.
 
+.. install-marker
 Installation
 ------------
 
@@ -83,12 +87,14 @@ Run ``python manage.py behave``
     Took.010s
     Destroying test database for alias 'default'...
 
+.. docs-marker
 Documentation
 -------------
 
 -  Documentation is available from `pythonhosted.org/behave-django`_
 -  Read more about *behave* at `pythonhosted.org/behave`_
 
+.. contribute-marker
 How to Contribute
 -----------------
 
