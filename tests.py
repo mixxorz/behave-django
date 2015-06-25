@@ -4,11 +4,13 @@ Run it by
 
 - ``python setup.py -q test -v`` or
 - ``python manage.py test`` or
-- ``python tests.py`` (preferred) or
-- ``py.test -v`` or ``py.test -q``
+- ``python tests.py`` (preferred)
 """
-from os import linesep as LF
+from django.core.management import call_command
+from mock import DEFAULT, patch
+from os import environ, linesep as LF
 from subprocess import PIPE, Popen
+import django
 import unittest
 
 
@@ -44,10 +46,21 @@ class BehaveDjangoTestCase(unittest.TestCase):
         assert exit_status != 0
 
     def test_dont_create_db_with_option_dryrun(self):
-        exit_status, output = run_silently(
-            'python manage.py behave --dry-run')
-        assert exit_status == 0
-        # TODO: test whether test database is created
+        with patch.multiple('behave_django.management.commands.behave',
+                            ExistingDatabaseTestRunner=DEFAULT,
+                            behave_main=DEFAULT) as values:
+            django_test_runner_mock = values['ExistingDatabaseTestRunner']
+            behave_main_mock = values['behave_main']
+            behave_main_mock.return_value = 0
+
+            # Setup Django so we can use `call_command`
+            environ.setdefault('DJANGO_SETTINGS_MODULE',
+                               'test_project.settings')
+            django.setup()
+            call_command('behave', dry_run=True)
+
+            # Assert that ExistingDatabaseTestRunner gets called
+            django_test_runner_mock.assert_called_with()
 
     def test_dont_create_db_with_option_useexistingdb(self):
         exit_status, output = run_silently(
