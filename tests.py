@@ -17,7 +17,8 @@ def run_silently(command):
     command_args = command.split()
     process = Popen(command_args, stdout=PIPE, stderr=PIPE, stdin=PIPE)
     stdout, stderr = process.communicate()
-    output = (stdout + LF + stderr).strip()
+    output = (stdout.decode(encoding='UTF-8') + LF +
+              stderr.decode(encoding='UTF-8')).strip()
     return process.returncode, output
 
 
