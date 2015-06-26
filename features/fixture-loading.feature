@@ -1,4 +1,3 @@
-@fail_existing_database
 Feature: Fixture loading
     In order to have sample data during my behave tests
     As the Maintainer

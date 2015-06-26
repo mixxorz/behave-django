@@ -1,4 +1,3 @@
-@fail_existing_database
 Feature: Database Transactions
     In order to test if transactions are done per scenario
     As the Maintainer

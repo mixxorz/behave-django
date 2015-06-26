@@ -61,23 +61,21 @@ class BehaveDjangoTestCase(unittest.TestCase):
             'python manage.py behave --tags @failing')
         assert exit_status != 0
 
-    @patch('behave_django.management.commands.behave.ExistingDatabaseTestRunner')  # noqa
     @patch('behave_django.management.commands.behave.behave_main', return_value=0)  # noqa
-    def test_dont_create_db_with_dryrun(self, mock_existing_database_runner,
-                                        mock_behave_main):
+    @patch('behave_django.management.commands.behave.ExistingDatabaseTestRunner')  # noqa
+    def test_dont_create_db_with_dryrun(self, mock_behave_main,
+                                        mock_existing_database_runner):
         run_management_command('behave', dry_run=True)
-        mock_existing_database_runner.assert_called_with(args=[])
+        mock_behave_main.assert_called_once_with()
+        mock_existing_database_runner.assert_called_once_with(args=[])
 
-    def test_dont_create_db_with_useexistingdb(self):
-        exit_status, output = run_silently(
-            'python manage.py behave --use-existing-database'
-            ' --tags ~@fail_existing_database --tags ~@failing')
-        assert exit_status == 0
-        exit_status, output = run_silently(
-            'python manage.py behave --use-existing-database'
-            ' --tags @fail_existing_database')
-        assert exit_status != 0
-        # TODO: test whether existing database is used
+    @patch('behave_django.management.commands.behave.behave_main', return_value=0)  # noqa
+    @patch('behave_django.management.commands.behave.ExistingDatabaseTestRunner')  # noqa
+    def test_dont_create_db_with_useexistingdb(self, mock_behave_main,
+                                               mock_existing_database_runner):
+        run_management_command('behave', use_existing_database=True)
+        mock_behave_main.assert_called_once_with()
+        mock_existing_database_runner.assert_called_once_with(args=[])
 
 
 if __name__ == '__main__':
