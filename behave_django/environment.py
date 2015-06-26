@@ -1,3 +1,5 @@
+import warnings
+
 from behave.runner import ModelRunner
 from django.core.management import call_command
 
@@ -65,3 +67,11 @@ def monkey_patch_behave(django_test_runner):
             django_test_runner.after_scenario(context)
 
     ModelRunner.run_hook = run_hook
+
+
+def before_scenario(*args, **kwargs):
+    warnings.warn("DEPRECATED: This function is no longer needed.")
+
+
+def after_scenario(*args, **kwargs):
+    warnings.warn("DEPRECATED: This function is no longer needed.")
