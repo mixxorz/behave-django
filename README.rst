@@ -7,6 +7,7 @@ behave-django
 Behave BDD integration for Django
 
 .. features-marker
+
 Features
 --------
 
@@ -86,6 +87,10 @@ Run ``python manage.py behave``
     3 steps passed, 0 failed, 0 skipped, 0 undefined
     Took.010s
     Destroying test database for alias 'default'...
+
+.. note::
+
+   Starting with version ``0.2.0``, you no longer need to insert the ``environment.before_scenario()`` and ``environment.after_scenario()`` functions in your ``environment.py`` file. The hooks are now included via monkey patching.
 
 .. docs-marker
 Documentation
