@@ -7,9 +7,10 @@ Run it by
 - ``python tests.py`` (preferred)
 """
 from django.core.management import call_command
-from mock import DEFAULT, patch
+from mock import patch
 from os import linesep as LF
 from subprocess import PIPE, Popen
+import django
 import os
 import unittest
 
@@ -24,7 +25,22 @@ def run_silently(command):
     return process.returncode, output
 
 
+def run_management_command(command, *args, **kwargs):
+    try:
+        # required only since version 1.7
+        django.setup()
+    except AttributeError:
+        pass
+    call_command(command, *args, **kwargs)
+
+
 class BehaveDjangoTestCase(unittest.TestCase):
+    def setUp(self):
+        # NOTE: this may potentially have side-effects, making tests pass
+        # that would otherwise fail, because it *always* overrides which
+        # settings module is used.
+        os.environ['DJANGO_SETTINGS_MODULE'] = 'test_project.settings'
+
     def test_flake8(self):
         exit_status, output = run_silently('flake8')
         assert exit_status == 0
@@ -45,27 +61,14 @@ class BehaveDjangoTestCase(unittest.TestCase):
             'python manage.py behave --tags @failing')
         assert exit_status != 0
 
-    def test_dont_create_db_with_option_dryrun(self):
-        os.environ['DJANGO_SETTINGS_MODULE'] = 'test_project.settings'
+    @patch('behave_django.management.commands.behave.ExistingDatabaseTestRunner')  # noqa
+    @patch('behave_django.management.commands.behave.behave_main', return_value=0)  # noqa
+    def test_dont_create_db_with_dryrun(self, mock_existing_database_runner,
+                                        mock_behave_main):
+        run_management_command('behave', dry_run=True)
+        mock_existing_database_runner.assert_called_with(args=[])
 
-        with patch.multiple('behave_django.management.commands.behave',
-                            ExistingDatabaseTestRunner=DEFAULT,
-                            behave_main=DEFAULT) as values:
-            django_test_runner_mock = values['ExistingDatabaseTestRunner']
-            behave_main_mock = values['behave_main']
-            behave_main_mock.return_value = 0
-            # set up Django (required since version 1.7)
-            try:
-                import django
-                django.setup()
-            except AttributeError:
-                pass
-            call_command('behave', dry_run=True)
-
-            # Assert that ExistingDatabaseTestRunner gets called
-            django_test_runner_mock.assert_called_with()
-
-    def test_dont_create_db_with_option_useexistingdb(self):
+    def test_dont_create_db_with_useexistingdb(self):
         exit_status, output = run_silently(
             'python manage.py behave --use-existing-database'
             ' --tags ~@fail_existing_database --tags ~@failing')
