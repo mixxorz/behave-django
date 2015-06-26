@@ -8,9 +8,9 @@ Run it by
 """
 from django.core.management import call_command
 from mock import DEFAULT, patch
-from os import environ, linesep as LF
+from os import linesep as LF
 from subprocess import PIPE, Popen
-import django
+import os
 import unittest
 
 
@@ -46,17 +46,20 @@ class BehaveDjangoTestCase(unittest.TestCase):
         assert exit_status != 0
 
     def test_dont_create_db_with_option_dryrun(self):
+        os.environ['DJANGO_SETTINGS_MODULE'] = 'test_project.settings'
+
         with patch.multiple('behave_django.management.commands.behave',
                             ExistingDatabaseTestRunner=DEFAULT,
                             behave_main=DEFAULT) as values:
             django_test_runner_mock = values['ExistingDatabaseTestRunner']
             behave_main_mock = values['behave_main']
             behave_main_mock.return_value = 0
-
-            # Setup Django so we can use `call_command`
-            environ.setdefault('DJANGO_SETTINGS_MODULE',
-                               'test_project.settings')
-            django.setup()
+            # set up Django (required since version 1.7)
+            try:
+                import django
+                django.setup()
+            except AttributeError:
+                pass
             call_command('behave', dry_run=True)
 
             # Assert that ExistingDatabaseTestRunner gets called
