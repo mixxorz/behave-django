@@ -34,13 +34,13 @@ Installation
 
 Install using pip
 
-.. code:: bash
+::
 
     $ pip install behave-django
 
 Add ``behave_django`` to your ``INSTALLED_APPS``
 
-.. code:: python
+::
 
     INSTALLED_APPS += ('behave_django',)
 
@@ -57,7 +57,7 @@ Create the features directory in your project’s root directory. (Next to
 
 Setup your ``environment.py`` file
 
-.. code:: python
+::
 
     from behave_django import environment
 
