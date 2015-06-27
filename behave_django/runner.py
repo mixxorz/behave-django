@@ -9,11 +9,13 @@ from behave_django.testcase import (BehaviorDrivenTestCase,
 
 
 class BehaviorDrivenTestRunner(DiscoverRunner, BehaveHooksMixin):
+
     """Test runner that uses the BehaviorDrivenTestCase"""
     testcase_class = BehaviorDrivenTestCase
 
 
 class ExistingDatabaseTestRunner(DiscoverRunner, BehaveHooksMixin):
+
     """Test runner that uses the ExistingDatabaseTestCase
 
     This test runner nullifies Django's test database setup methods. Using this
