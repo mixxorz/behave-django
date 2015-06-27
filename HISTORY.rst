@@ -6,19 +6,19 @@ Release History
 
 **Features and Improvements**
 
-- Integration with `behave` is now done via monkey patching. Including the `environment.before_scenario()` and `environment.after_scenario()` function calls in your `environment.py` file is no longer needed.
-- A new CLI option, `--use-existing-database`, has been added. See the `usage docs <https://pythonhosted.org/behave-django/usage.html#behave-command-line-options>`__.
+- Integration with :code:`behave` is now done via monkey patching. Including the :code:`environment.before_scenario()` and :code:`environment.after_scenario()` function calls in your :code:`environment.py` file is no longer needed.
+- A new CLI option, :code:`--use-existing-database`, has been added. See the `usage docs <https://pythonhosted.org/behave-django/usage.html#behave-command-line-options>`__.
 
 **Bugfixes**
 
-- Calling `python manage.py behave --dry-run` does not create a test database any longer.
+- Calling :code:`python manage.py behave --dry-run` does not create a test database any longer.
 
 0.1.4 (2015-06-08)
 ++++++++++++++++++
 
 **Features and Improvements**
 
-- `context.get_url()`. URL helper attached to context with built-in reverse resolution as a handy shortcut.
+- :code:`context.get_url()`. URL helper attached to context with built-in reverse resolution as a handy shortcut.
 
 0.1.3 (2015-05-13)
 ++++++++++++++++++
@@ -38,7 +38,7 @@ Release History
 **Features and Improvements**
 
 - You can now have a :code:`.behaverc` in your project's root directory. You can specify where your feature directories are in this file, among other things. See the `behave docs on configuration files <https://pythonhosted.org/behave/behave.html#configuration-files>`__.
-- Removed BEHAVE\_FEATURES setting in favor of using behave's configuration file
+- Removed :code:`BEHAVE\_FEATURES` setting in favor of using behave's configuration file
 
 0.1.1 (2015-04-04)
 ++++++++++++++++++
@@ -46,7 +46,7 @@ Release History
 **Features and Improvements**
 
 - Behave management command now accepts behave command line arguments
-- BEHAVE\_FEATURES settings added for multiple feature directories
+- :code:`BEHAVE\_FEATURES` settings added for multiple feature directories
 
 **Bugfixes**
 
