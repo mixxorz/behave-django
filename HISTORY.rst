@@ -1,6 +1,18 @@
 Release History
 ---------------
 
+0.2.0 (2015-06-27)
+++++++++++++++++++
+
+**Features and Improvements**
+
+- Integration with `behave` is now done via monkey patching. Including the `environment.before_scenario()` and `environment.after_scenario()` function calls in your `environment.py` file is no longer needed.
+- A new CLI option, `--use-existing-database`, has been added. See the `usage docs <https://pythonhosted.org/behave-django/usage.html#behave-command-line-options>`__.
+
+**Bugfixes**
+
+- Calling `python manage.py behave --dry-run` does not create a test database any longer.
+
 0.1.4 (2015-06-08)
 ++++++++++++++++++
 
