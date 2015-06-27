@@ -1,3 +1,5 @@
+import warnings
+
 from behave.runner import ModelRunner
 from django.core.management import call_command
 
@@ -11,9 +13,18 @@ except ImportError:
 
 
 class BehaveHooksMixin(object):
+
+    """Provides methods that run during test execution
+
+    These methods are attached to behave via monkey patching.
+    """
     testcase_class = None
 
     def before_scenario(self, context):
+        """Method that runs before behave's before_scenario function
+
+        Sets up the test case, base_url, and the get_url() utility function.
+        """
         context.test = self.testcase_class()
         context.test.setUpClass()
         context.test()
@@ -27,10 +38,17 @@ class BehaveHooksMixin(object):
         context.get_url = get_url
 
     def load_fixtures(self, context):
+        """Method that runs immediately after behave's before_scenario function
+
+        If fixtures are found in context, loads the fixtures using the loaddata
+        management command.
+        """
         if getattr(context, 'fixtures', None):
             call_command('loaddata', *context.fixtures, verbosity=0)
 
     def after_scenario(self, context):
+        """Method that runs immediately after behave's after_scenario function
+        """
         context.test.tearDownClass()
         del context.test
 
@@ -49,3 +67,13 @@ def monkey_patch_behave(django_test_runner):
             django_test_runner.after_scenario(context)
 
     ModelRunner.run_hook = run_hook
+
+
+def before_scenario(*args, **kwargs):
+    warnings.warn("DEPRECATED: This function is no longer needed.",
+                  stacklevel=2)
+
+
+def after_scenario(*args, **kwargs):
+    warnings.warn("DEPRECATED: This function is no longer needed.",
+                  stacklevel=2)

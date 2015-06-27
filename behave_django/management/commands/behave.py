@@ -23,6 +23,8 @@ def get_new_options():
 
 
 def get_behave_options():
+    """Creates options for the behave management command based on behave"""
+
     new_options = get_new_options()
 
     conflicts = [
