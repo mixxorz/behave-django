@@ -70,8 +70,10 @@ def monkey_patch_behave(django_test_runner):
 
 
 def before_scenario(*args, **kwargs):
-    warnings.warn("DEPRECATED: This function is no longer needed.")
+    warnings.warn("DEPRECATED: This function is no longer needed.",
+                  stacklevel=2)
 
 
 def after_scenario(*args, **kwargs):
-    warnings.warn("DEPRECATED: This function is no longer needed.")
+    warnings.warn("DEPRECATED: This function is no longer needed.",
+                  stacklevel=2)
