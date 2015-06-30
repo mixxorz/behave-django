@@ -11,21 +11,21 @@ from behave_django.runner import (BehaviorDrivenTestRunner,
                                   ExistingDatabaseTestRunner)
 
 
-def get_new_options():
-    return [
+def get_command_options():
+    return (
         make_option(
             '--use-existing-database',
             action='store_true',
             default=False,
             help="Don't create a test database. USE AT YOUR OWN RISK!",
         ),
-    ]
+    )
 
 
 def get_behave_options():
     """Creates options for the behave management command based on behave"""
 
-    new_options = get_new_options()
+    new_options = []
 
     conflicts = [
         '--no-color',
@@ -60,17 +60,18 @@ def get_behave_options():
 def get_behave_args():
     """Remove command line arguments not accepted by behave."""
     options = sys.argv[2:]
-    for new_opt in get_new_options():
-        try:
-            options.remove(new_opt.get_opt_string())
-        except ValueError:
-            pass
-    return options
+    incoming_args = [d.split('=')[0] for d in options]
+    accepted_args = [d.get_opt_string() for d in get_behave_options()]
+    behave_options = [options[k]
+                      for k, v in enumerate(incoming_args)
+                      if v in accepted_args]
+    return behave_options
 
 
 class Command(BaseCommand):
     help = 'Runs behave tests'
-    option_list = BaseCommand.option_list + get_behave_options()
+    option_list = BaseCommand.option_list + get_behave_options() + \
+        get_command_options()
 
     def handle(self, *args, **options):
         # Configure django environment
