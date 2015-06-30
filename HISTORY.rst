@@ -1,6 +1,13 @@
 Release History
 ---------------
 
+0.2.1 (2015-06-30)
+++++++++++++++++++
+
+**Bugfixes**
+
+- Fixed bug where invalid arguments are passed onto behave, making the command fail to execute.
+
 0.2.0 (2015-06-27)
 ++++++++++++++++++
 
