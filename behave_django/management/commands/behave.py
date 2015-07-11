@@ -1,8 +1,5 @@
 from __future__ import absolute_import
-from optparse import (make_option,
-                      OptionParser,
-                      BadOptionError,
-                      AmbiguousOptionError)
+from optparse import make_option
 import sys
 
 from behave.configuration import options as behave_options
@@ -10,6 +7,7 @@ from behave.__main__ import main as behave_main
 from django.core.management.base import BaseCommand
 
 from behave_django.environment import monkey_patch_behave
+from behave_django.parser import PassThroughOptionParser
 from behave_django.runner import (BehaviorDrivenTestRunner,
                                   ExistingDatabaseTestRunner)
 
@@ -110,25 +108,3 @@ class Command(BaseCommand):
 
         # The unrecognized args are for behave :)
         return args
-
-
-class PassThroughOptionParser(OptionParser):
-
-    """
-    An unknown option pass-through implementation of OptionParser.
-
-    When unknown arguments are encountered, bundle with largs and try again,
-    until rargs is depleted.
-
-    sys.exit(status) will still be called if a known argument is passed
-    incorrectly (e.g. missing arguments or bad argument types, etc.)
-
-    Source: http://stackoverflow.com/a/9307174
-    """
-
-    def _process_args(self, largs, rargs, values):
-        while rargs:
-            try:
-                OptionParser._process_args(self, largs, rargs, values)
-            except (BadOptionError, AmbiguousOptionError), e:
-                largs.append(e.opt_str)
