@@ -14,6 +14,8 @@ import django
 import os
 import unittest
 
+from behave_django.management.commands.behave import Command
+
 
 def run_silently(command):
     """Run a shell command and return both exit_status and console output."""
@@ -90,6 +92,45 @@ class BehaveDjangoTestCase(unittest.TestCase):
         run_management_command('behave', use_existing_database=True)
         mock_behave_main.assert_called_once_with(args=[])
         mock_existing_database_runner.assert_called_once_with()
+
+    def test_should_accept_behave_arguments(self):
+        command = Command()
+        args = command.get_behave_args(
+            argv=['manage.py', 'behave',
+                  '--format', 'progress',
+                  '--settings', 'test_project.settings',
+                  'features/running-tests.feature'])
+
+        assert '--format' in args
+        assert 'progress' in args
+
+    def test_should_not_include_non_behave_arguments(self):
+        command = Command()
+        args = command.get_behave_args(
+            argv=['manage.py', 'behave',
+                  '--format', 'progress',
+                  '--settings', 'test_project.settings',
+                  'features/running-tests.feature'])
+
+        assert '--settings' not in args
+        assert 'test_project.settings' not in args
+
+    def test_should_return_positional_args(self):
+        command = Command()
+        args = command.get_behave_args(
+            argv=['manage.py', 'behave',
+                  '--format', 'progress',
+                  '--settings', 'test_project.settings',
+                  'features/running-tests.feature'])
+
+        assert 'features/running-tests.feature' in args
+
+    def test_no_arguments_should_not_cause_issues(self):
+        command = Command()
+        args = command.get_behave_args(
+            argv=['manage.py', 'behave'])
+
+        assert args == []
 
 
 if __name__ == '__main__':
