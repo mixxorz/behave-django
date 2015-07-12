@@ -91,6 +91,49 @@ class BehaveDjangoTestCase(unittest.TestCase):
         mock_behave_main.assert_called_once_with(args=[])
         mock_existing_database_runner.assert_called_once_with()
 
+    def test_should_accept_behave_arguments(self):
+        from behave_django.management.commands.behave import Command
+        command = Command()
+        args = command.get_behave_args(
+            argv=['manage.py', 'behave',
+                  '--format', 'progress',
+                  '--settings', 'test_project.settings',
+                  'features/running-tests.feature'])
+
+        assert '--format' in args
+        assert 'progress' in args
+
+    def test_should_not_include_non_behave_arguments(self):
+        from behave_django.management.commands.behave import Command
+        command = Command()
+        args = command.get_behave_args(
+            argv=['manage.py', 'behave',
+                  '--format', 'progress',
+                  '--settings', 'test_project.settings',
+                  'features/running-tests.feature'])
+
+        assert '--settings' not in args
+        assert 'test_project.settings' not in args
+
+    def test_should_return_positional_args(self):
+        from behave_django.management.commands.behave import Command
+        command = Command()
+        args = command.get_behave_args(
+            argv=['manage.py', 'behave',
+                  '--format', 'progress',
+                  '--settings', 'test_project.settings',
+                  'features/running-tests.feature'])
+
+        assert 'features/running-tests.feature' in args
+
+    def test_no_arguments_should_not_cause_issues(self):
+        from behave_django.management.commands.behave import Command
+        command = Command()
+        args = command.get_behave_args(
+            argv=['manage.py', 'behave'])
+
+        assert args == []
+
 
 if __name__ == '__main__':
     unittest.main()
