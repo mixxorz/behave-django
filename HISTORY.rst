@@ -1,6 +1,13 @@
 Release History
 ---------------
 
+0.2.2 (2015-07-13)
+++++++++++++++++++
+
+**Bugfixes**
+
+- Fixed bug where positional arguments don't get sent to behave.
+
 0.2.1 (2015-06-30)
 ++++++++++++++++++
 
