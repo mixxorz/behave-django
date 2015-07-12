@@ -20,6 +20,7 @@ Features
 -  Fixture loading
 
 .. support-marker
+
 Support
 -------
 
@@ -29,6 +30,7 @@ Specifically, our tests cover:
 Django 1.4.20, 1.5.12, 1.6.11, 1.7.8, 1.8.2, and Python 2.6, 2.7, 3.3, 3.4.
 
 .. install-marker
+
 Installation
 ------------
 
@@ -93,6 +95,7 @@ Run ``python manage.py behave``
    Starting with version ``0.2.0``, you no longer need to insert the ``environment.before_scenario()`` and ``environment.after_scenario()`` functions in your ``environment.py`` file. The hooks are now included via monkey patching.
 
 .. docs-marker
+
 Documentation
 -------------
 
@@ -100,6 +103,7 @@ Documentation
 -  Read more about *behave* at `pythonhosted.org/behave`_
 
 .. contribute-marker
+
 How to Contribute
 -----------------
 
