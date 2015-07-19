@@ -2,7 +2,7 @@ behave-django
 =============
 .. intro-marker
 
-|Build Status| |Latest Version|
+|Build Status| |Latest Version| |Downloads|
 
 Behave BDD integration for Django
 
@@ -113,7 +113,9 @@ Please, read the `contributing guide`_.
 .. _pythonhosted.org/behave-django: https://pythonhosted.org/behave-django/
 .. _pythonhosted.org/behave: http://pythonhosted.org/behave/
 .. _contributing guide: https://github.com/mixxorz/behave-django/blob/master/CONTRIBUTING.md
-.. |Build Status| image:: https://travis-ci.org/mixxorz/behave-django.svg?branch=master
-   :target: https://travis-ci.org/mixxorz/behave-django
-.. |Latest Version| image:: https://badge.fury.io/py/behave-django.svg
-    :target: http://badge.fury.io/py/behave-django
+.. |Build Status| image:: https://img.shields.io/travis/mixxorz/behave-django/master.svg
+    :target: https://travis-ci.org/mixxorz/behave-django
+.. |Latest Version| image:: https://img.shields.io/pypi/v/behave-django.svg
+    :target: https://pypi.python.org/pypi/behave-django/
+.. |Downloads| image:: https://img.shields.io/pypi/dm/behave-django.svg
+    :target: https://pypi.python.org/pypi/behave-django/
