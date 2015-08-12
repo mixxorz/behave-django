@@ -134,6 +134,19 @@ class BehaveDjangoTestCase(unittest.TestCase):
 
         assert args == []
 
+    def test_command_import_dont_patch_behave_options(self):
+        # We reload the tested imports because they
+        # could have been imported by previous tests.
+        import copy
+        import behave.configuration
+        reload(behave.configuration)
+        behave_options_backup = copy.deepcopy(behave.configuration.options)
+
+        import behave_django.management.commands.behave
+        reload(behave_django.management.commands.behave)
+
+        assert behave.configuration.options == behave_options_backup
+
 
 if __name__ == '__main__':
     unittest.main()
