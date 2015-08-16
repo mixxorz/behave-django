@@ -35,6 +35,7 @@ def get_behave_options():
 
     for fixed, keywords in behave_options:
         # TODO: accept short options too
+        keywords = keywords.copy()
         long_option = None
         for option in fixed:
             if option.startswith("--"):

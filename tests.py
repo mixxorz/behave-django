@@ -13,6 +13,7 @@ from subprocess import PIPE, Popen
 import django
 import os
 import unittest
+from imp import reload
 
 
 def run_silently(command):
@@ -133,6 +134,21 @@ class BehaveDjangoTestCase(unittest.TestCase):
             argv=['manage.py', 'behave'])
 
         assert args == []
+
+    def test_command_import_dont_patch_behave_options(self):
+        # We reload the tested imports because they
+        # could have been imported by previous tests.
+        import behave.configuration
+        reload(behave.configuration)
+        behave_options_backup = [
+            (first, second.copy())
+            for (first, second) in behave.configuration.options
+        ]
+
+        import behave_django.management.commands.behave
+        reload(behave_django.management.commands.behave)
+
+        assert behave.configuration.options == behave_options_backup
 
 
 if __name__ == '__main__':
