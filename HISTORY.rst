@@ -1,6 +1,13 @@
 Release History
 ---------------
 
+0.2.3 (2015-08-21)
+++++++++++++++++++
+
+**Bugfixes**
+
+- Fixed bug where some behave commands do not work
+
 0.2.2 (2015-07-13)
 ++++++++++++++++++
 
