@@ -27,7 +27,7 @@ Support
 behave-django supports all current Django and Python versions.
 Specifically, our tests cover:
 
-Django 1.4.20, 1.5.12, 1.6.11, 1.7.8, 1.8.2, and Python 2.6, 2.7, 3.3, 3.4.
+Django 1.4.22, 1.5.12, 1.6.11, 1.7.10, 1.8.4, and Python 2.6, 2.7, 3.3, 3.4.
 
 .. install-marker
 
