@@ -99,11 +99,22 @@ management command.
 
 Additional command line options provided by django_behave:
 
---use-existing-database
-    Don't create a test database, and use the database of your default
-    runserver instead.  USE AT YOUR OWN RISK!  Only use this option
-    for testing against a *copy* of your production database or other
-    valuable data.  Your tests may destroy your data irrecoverably.
+``--use-existing-database``
+***************************
+
+Don't create a test database, and use the database of your default runserver
+instead. USE AT YOUR OWN RISK! Only use this option for testing against a
+*copy* of your production database or other valuable data. Your tests may
+destroy your data irrecoverably.
+
+``--keepdb``
+************
+
+Starting with Django 1.8, the ``--keepdb`` flag was added to ``manage.py test``
+to facilitate faster testing by using the existing database instead of
+recreating it each time you run the test. This flag enables
+``manage.py behave --keepdb`` to take advantage of that feature.
+|keepdb docs|_.
 
 Behave configuration file
 -------------------------
@@ -164,3 +175,5 @@ mutate it however you want, it will only be processed upon leaving the
 .. _django.shortcuts.redirect: https://docs.djangoproject.com/en/dev/topics/http/shortcuts/#redirect
 .. _factories: https://factoryboy.readthedocs.org/en/latest/
 .. _behave docs: https://pythonhosted.org/behave/behave.html#configuration-files
+.. |keepdb docs| replace:: More information about ``--keepdb``
+.. _keepdb docs: http://docs.python.org/library/optparse.html
