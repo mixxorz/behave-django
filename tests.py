@@ -12,7 +12,7 @@ from os import linesep as LF
 from subprocess import PIPE, Popen
 import django
 import os
-import unittest
+import unittest2 as unittest
 from imp import reload
 
 
