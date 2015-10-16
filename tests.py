@@ -12,7 +12,7 @@ from os import linesep as LF
 from subprocess import PIPE, Popen
 import django
 import os
-import unittest
+import unittest2 as unittest
 from imp import reload
 
 
@@ -149,6 +149,20 @@ class BehaveDjangoTestCase(unittest.TestCase):
         reload(behave_django.management.commands.behave)
 
         assert behave.configuration.options == behave_options_backup
+
+    @unittest.skipIf(django.VERSION < (1, 8),
+                     'keepdb not available in Django < 1.8')
+    @patch('behave_django.management.commands.behave.behave_main', return_value=0)  # noqa
+    @patch('behave_django.management.commands.behave.BehaviorDrivenTestRunner')  # noqa
+    def test_keepdb_flag_should_set_test_runner_for_keepdb(self,
+                                                           mock_test_runner,
+                                                           mock_behave_main):
+        """Test if keepdb is properly set on the test_runner"""
+
+        instance = mock_test_runner.return_value
+        # TODO: Skip test if Django < 1.8
+        run_management_command('behave', keepdb=True)
+        assert instance.keepdb is True
 
 
 if __name__ == '__main__':

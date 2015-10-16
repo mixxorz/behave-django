@@ -20,6 +20,12 @@ def get_command_options():
             default=False,
             help="Don't create a test database. USE AT YOUR OWN RISK!",
         ),
+        make_option(
+            '--keepdb',
+            action='store_true',
+            default=False,
+            help="Preserves the test DB between runs.",
+        ),
     )
 
 
@@ -73,7 +79,12 @@ class Command(BaseCommand):
             django_test_runner = ExistingDatabaseTestRunner()
         else:
             django_test_runner = BehaviorDrivenTestRunner()
+
         django_test_runner.setup_test_environment()
+
+        if options['keepdb']:
+            django_test_runner.keepdb = True
+
         old_config = django_test_runner.setup_databases()
 
         # Run Behave tests
