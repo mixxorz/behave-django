@@ -1,5 +1,6 @@
 language: python
 env:
+  - TOXENV=flake8
   - TOXENV=py26-django14
   - TOXENV=py27-django14
   - TOXENV=py26-django15
