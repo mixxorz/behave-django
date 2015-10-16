@@ -34,6 +34,15 @@ Make your change. Add tests for your change. Make the tests pass:
     $ python tests.py
 ```
 
+Finally, make sure your tests pass on all the configurations behave-django supports. We use tox for this. Python 2.6, 2.7, 3.3 and 3.4 needs to be available in your PATH.
+
+```bash
+    $ pip install tox
+    $ tox
+```
+
+You can choose not to run the tox tests, but make sure your tests pass in the CI server when you push your PR.
+
 Your tests don't have to be behave tests. :smile:
 
 Push to your fork and [submit a pull request][pr].
