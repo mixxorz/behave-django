@@ -43,10 +43,6 @@ class BehaveDjangoTestCase(unittest.TestCase):
         # settings module is used.
         os.environ['DJANGO_SETTINGS_MODULE'] = 'test_project.settings'
 
-    def test_flake8(self):
-        exit_status, output = run_silently('flake8')
-        assert exit_status == 0
-
     def test_additional_management_command_options(self):
         exit_status, output = run_silently('python manage.py behave --help')
         assert exit_status == 0
