@@ -4,6 +4,7 @@
 flake8
 mock
 unittest2
+tox
 
 # docs generation (e.g. `cd docs && make html`)
 Sphinx
