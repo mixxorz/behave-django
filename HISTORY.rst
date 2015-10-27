@@ -1,6 +1,14 @@
 Release History
 ---------------
 
+0.3.0 (2015-10-27)
+++++++++++++++++++
+
+**Features and Improvements**
+
+- Added the :code:`--keepdb` flag to reuse the existing test database instead of recreating it for every test run. (Django >= 1.8 only)
+- Overhaul tests to use Tox and pytest for a better testing experience.
+
 0.2.3 (2015-08-21)
 ++++++++++++++++++
 
