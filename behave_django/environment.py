@@ -6,10 +6,10 @@ from django.core.management import call_command
 try:
     from django.shortcuts import resolve_url
 except ImportError:
-    # support Django 1.4, which has no resolve_url() yet
-    from django.shortcuts import redirect
-    resolve_url = lambda to, *args, **kwargs: \
-        redirect(to, *args, **kwargs)['Location']
+    def resolve_url(to, *args, **kwargs):
+        """Support Django 1.4, which has no built-in resolve_url()"""
+        from django.shortcuts import redirect
+        return redirect(to, *args, **kwargs)['Location']
 
 
 class BehaveHooksMixin(object):
