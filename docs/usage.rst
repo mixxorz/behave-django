@@ -172,8 +172,15 @@ Of course, since ``context.fixtures`` is really just a list, you can
 mutate it however you want, it will only be processed upon leaving the
 ``before_scenario()`` function of your ``environment.py`` file.
 
+**NOTE:** If you provide initial data via Python code `using the ORM`_ you
+need to place these calls in ``before_scenario()`` even if the data is meant
+to be used on the whole feature.  This is because Django's
+``LiveServerTestCase`` resets the test database after each scenario.
+
+
 .. _django.shortcuts.redirect: https://docs.djangoproject.com/en/dev/topics/http/shortcuts/#redirect
 .. _factories: https://factoryboy.readthedocs.org/en/latest/
 .. _behave docs: https://pythonhosted.org/behave/behave.html#configuration-files
 .. |keepdb docs| replace:: More information about ``--keepdb``
 .. _keepdb docs: http://docs.python.org/library/optparse.html
+.. _using the ORM: https://docs.djangoproject.com/en/1.9/topics/testing/tools/#fixture-loading

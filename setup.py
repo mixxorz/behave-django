@@ -8,7 +8,7 @@ with open(join(dirname(__file__), 'README.rst')) as readme:
 # allow setup.py to be run from any path
 chdir(normpath(abspath(dirname(__file__))))
 
-import behave_django
+import behave_django  # noqa
 
 setup(
     name='behave-django',

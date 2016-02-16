@@ -1,5 +1,5 @@
-Welcome to behave-django's documentation!
-=========================================
+behave-django
+=============
 
 .. include:: ../README.rst
    :start-after: .. intro-marker
