@@ -25,9 +25,9 @@ Support
 -------
 
 behave-django supports all current Django and Python versions.
-Specifically, our tests cover:
+Specifically, our tests cover the latest patch version of:
 
-Django 1.4.22, 1.5.12, 1.6.11, 1.7.10, 1.8.4, and Python 2.6, 2.7, 3.3, 3.4.
+Django 1.4, 1.5, 1.6, 1.7, 1.8, 1.9 on Python 2.6, 2.7, 3.3, 3.4, 3.5.
 
 .. install-marker
 
@@ -77,10 +77,6 @@ Run ``python manage.py behave``
     3 steps passed, 0 failed, 0 skipped, 0 undefined
     Took.010s
     Destroying test database for alias 'default'...
-
-.. note::
-
-   Starting with version ``0.2.0``, you no longer need to insert the ``environment.before_scenario()`` and ``environment.after_scenario()`` functions in your ``environment.py`` file. The hooks are now included via monkey patching.
 
 .. docs-marker
 
