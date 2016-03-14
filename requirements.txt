@@ -1,2 +1,0 @@
-behave
-Django>=1.4
